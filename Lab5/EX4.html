@@ -9,9 +9,11 @@
     <div id="taxNumbers">
     <script>
         var amount = 20.00
-        var pctAsDecimal = (4.13/100)
-        document.getElementById("taxNumbers").innerHTML = "The tax on Marcus's bill is" + " " + pctAsDecimal * amount
-        numbertoFixed(2)
+        var pctAsDecimal = 0.0413
+        var tax = amount * pctAsDecimal
+        document.write
+        document.getElementById("taxNumbers").innerHTML = "The tax on Marcus's bill is" + " ";
+        document.write(tax.toFixed(2));
     </script>
     </div>
 </body>

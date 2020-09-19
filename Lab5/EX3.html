@@ -7,10 +7,23 @@
 </head>
 <body>
     <script>
-        var firstName = "Marcus"
-        var middleName = "Rick"
+        var firstName = "Marcus "
+        var middleName = "Rick "
         var lastName = "Bui"
         var fullName = "firstName + middleName + lastName"
+        var fullName2 = firstName.concat(middleName,lastName)
+        firstName.concat(middleName,lastName);
+        document.write(fullName2);
+    </script>
+    <BR>
+    <script>
+        var initial= firstName.charAt(0) + "." + lastName.charAt(0) + ".";
+        document.write(initial);
+    </script>
+    <BR>
+    <script>
+        var fancyName = '<b>' + firstName + '</b><br>' + '<em>' + middleName + '</em><br>' + '<font size ="120%">' + lastName + '</font>'
+        document.write(fancyName);
     </script>
 </body>
 </html>
