@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditionals</title>
+</head>
+<body>
+    <h1>Invoice</h1>
+    <script>
+        state = 'CA';       //retrieved from user profile (example)
+        switch (state) {
+        case 'HI':
+            taxRate = 0.0417;
+            break;
+        case 'CA':
+            taxRate = 0.08;
+            break
+        case 'VT':
+            taxRate = 0.0;
+            break
+        default:
+            taxRate = 0.02;
+            break;    
+        }
+
+        /* if (state == 'HI') {
+            taxRate = 0.0417;
+        }
+        else if (state == 'CA') {
+            taxRate = 0.08;
+        }
+
+        above is same as the switch and case
+        */
+
+
+        /*
+        Tihs program outputs a customer invoice.
+        Date: Sept. 25, 2020
+        Author: Marcus Bui
+        */
+
+        var subTotal = 120;
+        //var taxRate = 0.05;
+        var grandTotal = 0;     //set a default value to "initialize" it for now
+        var taxExempt = false;   // Tax exempt status
+        var taxOwing = 0;
+        var discountRate = 0.1;     //discount rate for tax-exempt businesses
+
+        var subTotalOut = `Your sub-total is $ ${subTotal}`;
+        document.write(subTotalOut);
+        document.write('<BR>');
+        
+        if (taxExempt == true && subTotal > 100) {      //calculate discount, if applicable
+            discount = subTotal * discountRate;   
+            document.write(`Congratulations! You get a discount of $ ${discount}<BR>`);
+            subTotal = subTotal - discount;     //same as subTotal -= discount, had to add to actually show the discount
+        }
+
+        if (taxExempt == true) {        //tax exempt; print message
+            
+            document.write("You are tax exempt <BR>");
+            
+        }
+        else {          //calculate tax owing
+            taxOwing = subTotal * taxRate;
+            taxOut = taxOwing.toFixed(2);
+            var taxOwingOut = `You owe: $ ${taxOut} in tax <BR>`;
+            document.write(taxOwingOut);
+        }
+
+        grandTotal = subTotal + taxOwing;
+        grandTotalOut = grandTotal.toFixed(2);
+        
+        var totalOut = `Your grand total is: $ ${grandTotal}`;
+        document.write(totalOut);
+    </script>
+</body>
+</html>
