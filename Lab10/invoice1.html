@@ -10,37 +10,56 @@
      var quantity1 = 2;
      var price1 = 1.23;
      */
+
+    // 3rd way to add element to array
+    var fruits = ["Lemon", "Apple"];
+    var fruits_len = fruits.length;
+    fruits[fruits_len] = "Pear";
+
     var product1 = {
-      "item": 'Gillette Sensor 3 Razor',
+      "name": 'Gillette Sensor 3 Razor',
       "quantity": 2,
-      price: 1.23,
+      "SKU#" : "1234",
+      "price": 1.23,
     }
 
     product1.quantity = 0;
+    product1["price"] = 0;
+    product1["SKU#"] = "2345";
+    delete product1["SKU#"];
 
      // Product 2
-    var item2 = 'Barbasol Shaving Cream';
-     var quantity2 = 1;
-     var price2 = 2.64;
+    var product2 = {
+      "name" : 'Barbasol Shaving Cream',
+      "quantity" : 1,
+      "price" : 2.64,
+     }
 
      // Product 3
-    var item3 = 'Nautica Cologne';
-     var quantity3 = 1;
-     var price3 = 6.17;
+     var product3 = {
+      "name" : 'Nautica Cologne',
+      "quantity": 1,
+      "price" : 6.17,
+    }
+
 
      // Product 4
-    var item4 = 'Rubbing Alcohol';
-     var quantity4 = 3;
-     var price4 = 0.98;
+     var product4 = {
+      "name" : 'Rubbing Alcohol',
+      "quantity" : 3,
+      "price" : 0.98,
+    }
 
      // Product 5
-    var item5 = 'Colgate Classic Toothbrush';
-     var quantity5 = 12;
-     var price5 = 1.89;
+     var product5 = {
+      "name" : 'Colgate Classic Toothbrush',
+      "quantity" : 12,
+      "price" : 1.89,
+    }
 
      // Compute extended price
     // var extended_price1 = quantity1 * price1
-    var extended_price1 = product1["quantity"] * product1.price;
+    var extended_price1 = product1.quantity * product1.price;
      var extended_price2 = quantity2 * price2
      var extended_price3 = quantity3 * price3
      var extended_price4 = quantity4 * price4
@@ -77,7 +96,7 @@
               // product row 1
               document.write(`
           <tr>
-            <td width="43%">${product1.item}</td>
+            <td width="43%">${product1.name}</td>
             <td align="center" width="11%">${product1.quantity}</td>
             <td width="13%">\$${product1.price}</td>
             <td width="54%">\$${extended_price1}</td>
