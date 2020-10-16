@@ -1,12 +1,20 @@
-var employees = ["James", "Phineas", "Hercules", "Batgirl", "Wonder Woman"];
+var employees = ["James", "Phineas", "Hercules", "Batgirl", "Wonder Woman", "Jonas"];
 var my_kids = [["James", 6, 59.5], ["Goober", 2, 35.2], ["Stretch", 19, 200]];
-console.log(my_kids);
+// console.log(my_kids);
 
 var my_kid1 = {
     "name": "James",
     "age": 6,
     "weight": 59.5
+};
+
+/*
+for (attrib in my_kid1) {
+    console.log(my_kid1[attrib]);
+    console.log(my_kid1.attrib);
 }
+*/
+
 
 var my_kid2 = {
     "name": "Goober",
@@ -20,12 +28,13 @@ var my_kid3 = {
     "weight": 200
 };
 
+/*
 better_kids = [my_kid1, my_kid2, my_kid3];
 
 for (i=0; i<better_kids.length; i++) {
     console.log("My kid " + better_kids[i].name + " is " + better_kids[i].age + " years old.");
 }
-
+*/
 /* for (i = 0; i < my_kids.length; i++) {
     console.log("My kid %s weighs %d", my_kids[i][0], my_kids[i][2]);
 }
@@ -42,3 +51,12 @@ for (i=0; i<better_kids.length; i++) {
     
 }
 */
+
+for (empl of employees) {
+        if (empl % 2 == 0) {
+            console.log("Team 1 Member: " + empl);
+        } else
+        {
+         console.log("Team 2 Member: " + empl);   
+        }
+}
