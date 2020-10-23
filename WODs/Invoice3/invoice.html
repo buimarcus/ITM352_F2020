@@ -1,7 +1,6 @@
 <script>
-  /*
-  This creates and displays a sales invoice
-  */
+   /* Invoice based on product data
+    */
 
   //Product Data
 
@@ -52,7 +51,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invoice 3</title>
+  <title>Document</title>
 </head>
 
 <body>
@@ -125,11 +124,11 @@
         </tr>
         `);
 
-              //Compute tax
+              // Compute tax
               var tax_rate = 0.0575;
               var tax = tax_rate * Subtotal;
 
-              //Compute Shipping 
+              // Compute Shipping 
               if (Subtotal <= 50) {
                   shipping = 2;
               }
@@ -137,9 +136,9 @@
                   shipping = 5;
               }
               else {
-                  shipping = 0.05 * Subtotal; //5% of Subtotal
+                  shipping = 0.05 * Subtotal; // 5% of Subtotal
               }
-              //Compute grand total
+              // Compute grand total
               var total = Subtotal + tax;
           </script>
           <tr>
