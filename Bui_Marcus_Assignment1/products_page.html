@@ -9,7 +9,7 @@
             }
     
             function checkQuantityTextbox() {
-                errs = isNonNegInt(fivedm4_quantity_textbox.value, eosr6_quantity_textbox.value, eos1dx_quantity_textbox.value, a7iii_quantity_textbox.value,  a7Riv_quantity_textbox.value, true);
+                errs = isNonNegInt[fivedm4_quantity_textbox.value, eosr6_quantity_textbox.value, eos1dx_quantity_textbox.value, a7iii_quantity_textbox.value,  a7Riv_quantity_textbox.value, true];
                 quantity_textbox_message.innerHTML = errs.join(", ");
             }    
     
@@ -55,6 +55,8 @@
             Subtotals over $100 will be charged 5% of the subtotal amount
         </b> </div>
     <br>
+    <div class="row">
+    <div class="column">
     <div class="card">
         <img src="./images/canon5dm4.jpg" alt="Canon 5D Mark IV" style="width:100%">
         <h1>Canon 5D Mark IV</h1>
@@ -67,7 +69,9 @@
             <input type="text" id="fivedm4_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
-<br>
+    </div>
+
+<div class="column">
       <div class="card">
         <img src="./images/canonr6.jpg" alt="Canon EOS R6" style="width:100%">
         <h1>Canon EOS R6 </h1>
@@ -78,29 +82,35 @@
             <input type="text" id="eosr6_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
-<br>
+    </div>
+
+<div class="column">
       <div class="card">
         <img src="./images/canon1dx.jpeg" alt="Canon EOS 1D X" style="width:100%">
         <h1>Canon EOS 1D X</h1>
         <p class="price">$5299.00</p>
-        <p>The most expensive DSLR you'd ever want</p>
+        <p>The most expensive DSLR ever</p>
         <form name="eos1dx_quantity_form" action="" method="POST">
             <label for="eos1dx_quantity_textbox">Quantity</label>
             <input type="text" id="eos1dx_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
+    </div>
 <br>
+<div class="column">
       <div class="card">
         <img src="./images/a7iii.jpeg" alt="Sony a7 III" style="width:100%">
         <h1>Sony a7 III</h1>
         <p class="price">$1899.99</p>
-        <p>Sony's slightly less good mirrorless camera</p>
+        <p>Sony's less good mirrorless camera</p>
         <form name="a7iii_quantity_form" action="" method="POST">
             <label for="a7iii_quantity_textbox">Quantity</label>
             <input type="text" id="a7iii_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
+    </div>
 <br>
+<div class="column">
       <div class="card">
         <img src="./images/a7RIV.jpeg" alt="Sony a7R IV" style="width:100%">
         <h1>Sony a7R IV</h1>
@@ -111,11 +121,15 @@
             <input type="text" id="a7Riv_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
+    </div>
 <br>
+<div class="column">
       <div class="card">
-        <input type="submit" value="Checkout" onclick="displayPurchse()">
+        <img src="./images/cart.png" style="width: 50%;">
+        <input type="button" value="Checkout" onclick="location.href='invoice.html'">
       </div>
-
+    </div>
+</div>
       <script src="javascript/products_data.js"></script>
 </body>
 </html>
