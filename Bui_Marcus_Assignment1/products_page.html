@@ -1,3 +1,26 @@
+<script>
+    function isNonNegInt(stringToCheck, returnErrors = false) {
+        errors = []; // assume no errors at first
+        if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
+        if (stringToCheck < 0) errors.push('Negative value!'); // Check if it is non-negative
+        if (parseInt(stringToCheck) != stringToCheck) errors.push(' Not an integer!'); // Check that it is an integer
+    
+            return returnErrors ? errors : (errors.length == 0);
+            }
+    
+            function checkQuantityTextbox() {
+                errs = isNonNegInt(fivedm4_quantity_textbox.value, eosr6_quantity_textbox.value, eos1dx_quantity_textbox.value, a7iii_quantity_textbox.value,  a7Riv_quantity_textbox.value, true);
+                quantity_textbox_message.innerHTML = errs.join(", ");
+            }    
+    
+            function displayPurchase() {
+                userInput = (fivedm4_quantity_textbox.value + eosr6_quantity_textbox.value + eos1dx_quantity_textbox.value + a7iii_quantity_textbox.value +  a7Riv_quantity_textbox.value);
+                if (isNonNegInt(userInput)) {
+                    document.write(`Thank you for purchasing ${userInput} cameras!`)
+                }
+            }
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +35,26 @@
     <header>
         <h1>PURCHASE THE TOP CAMERAS OUT NOW!</h1>
     </header>
+    <nav>
+        <ul id="mainMenu"> 
+            <li class="selected"><a href="index.html">Home</a></li>
+        </ul>  
+    </nav>
+    <br>
+    <br>
+    <br>
 
+    <div>
+    <b>
+            OUR SHIPPING POLICY IS:
+            <br>
+            A subtotal $0 - $49.99 will be $2 shipping
+            <br>
+            A subtotal $50 - $99.99 will be $5 shipping
+            <br>
+            Subtotals over $100 will be charged 5% of the subtotal amount
+        </b> </div>
+    <br>
     <div class="card">
         <img src="./images/canon5dm4.jpg" alt="Canon 5D Mark IV" style="width:100%">
         <h1>Canon 5D Mark IV</h1>
@@ -20,10 +62,9 @@
         <p>4th edition of the famous Canon 5D</p>
 
         <!--replaced the "Add to Cart" from w3schools with a quantity submission-->
-        <form name="5dm4_quantity_form" action="" method="POST">
-            <label for="5dm4_quantity_textbox">Quantity</label>
-            <input type="text" id="5dm4_quantity_textbox" onkeyup="">
-            <input type="submit" value="Purchase">
+        <form name="fivedm4_quantity_form" action="" method="POST">
+            <label for="fivedm4_quantity_textbox">Quantity</label>
+            <input type="text" id="fivedm4_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
 <br>
@@ -34,8 +75,7 @@
         <p>Canon's best mirrorless camera</p>
         <form name="eosr6_quantity_form" action="" method="POST">
             <label for="eosr6_quantity_textbox">Quantity</label>
-            <input type="text" id="eosr6_quantity_textbox" onkeyup="">
-            <input type="submit" value="Purchase">
+            <input type="text" id="eosr6_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
 <br>
@@ -46,8 +86,7 @@
         <p>The most expensive DSLR you'd ever want</p>
         <form name="eos1dx_quantity_form" action="" method="POST">
             <label for="eos1dx_quantity_textbox">Quantity</label>
-            <input type="text" id="eos1dx_quantity_textbox" onkeyup="">
-            <input type="submit" value="Purchase">
+            <input type="text" id="eos1dx_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
 <br>
@@ -58,8 +97,7 @@
         <p>Sony's slightly less good mirrorless camera</p>
         <form name="a7iii_quantity_form" action="" method="POST">
             <label for="a7iii_quantity_textbox">Quantity</label>
-            <input type="text" id="a7iii_quantity_textbox" onkeyup="">
-            <input type="submit" value="Purchase">
+            <input type="text" id="a7iii_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
 <br>
@@ -70,11 +108,14 @@
         <p>Sony's better mirrorless camera</p>
         <form name="a7Riv_quantity_form" action="" method="POST">
             <label for="a7Riv_quantity_textbox">Quantity</label>
-            <input type="text" id="a7Riv_quantity_textbox" onkeyup="">
-            <input type="submit" value="Purchase">
+            <input type="text" id="a7Riv_quantity_textbox" onkeyup="checkQuantityTextbox()">
         </form>
       </div>
 <br>
+      <div class="card">
+        <input type="submit" value="Checkout" onclick="displayPurchse()">
+      </div>
+
       <script src="javascript/products_data.js"></script>
 </body>
 </html>
