@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Shop</title>
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Roboto" rel="stylesheet">
+    <link href="products-style.css" rel="stylesheet">
+    <link href="mainMenu-style.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>PURCHASE THE TOP CAMERAS OUT NOW!</h1>
+    </header>
+
+    <div class="card">
+        <img src="./images/canon5dm4.jpg" alt="Canon 5D Mark IV" style="width:100%">
+        <h1>Canon 5D Mark IV</h1>
+        <p class="price">$3339.00</p>
+        <p>4th edition of the famous Canon 5D</p>
+
+        <!--replaced the "Add to Cart" from w3schools with a quantity submission-->
+        <form name="5dm4_quantity_form" action="" method="POST">
+            <label for="5dm4_quantity_textbox">Quantity</label>
+            <input type="text" id="5dm4_quantity_textbox" onkeyup="">
+            <input type="submit" value="Purchase">
+        </form>
+      </div>
+<br>
+      <div class="card">
+        <img src="./images/canonr6.jpg" alt="Canon EOS R6" style="width:100%">
+        <h1>Canon EOS R6 </h1>
+        <p class="price">$2499.00</p>
+        <p>Canon's best mirrorless camera</p>
+        <form name="eosr6_quantity_form" action="" method="POST">
+            <label for="eosr6_quantity_textbox">Quantity</label>
+            <input type="text" id="eosr6_quantity_textbox" onkeyup="">
+            <input type="submit" value="Purchase">
+        </form>
+      </div>
+<br>
+      <div class="card">
+        <img src="./images/canon1dx.jpeg" alt="Canon EOS 1D X" style="width:100%">
+        <h1>Canon EOS 1D X</h1>
+        <p class="price">$5299.00</p>
+        <p>The most expensive DSLR you'd ever want</p>
+        <form name="eos1dx_quantity_form" action="" method="POST">
+            <label for="eos1dx_quantity_textbox">Quantity</label>
+            <input type="text" id="eos1dx_quantity_textbox" onkeyup="">
+            <input type="submit" value="Purchase">
+        </form>
+      </div>
+<br>
+      <div class="card">
+        <img src="./images/a7iii.jpeg" alt="Sony a7 III" style="width:100%">
+        <h1>Sony a7 III</h1>
+        <p class="price">$1899.99</p>
+        <p>Sony's slightly less good mirrorless camera</p>
+        <form name="a7iii_quantity_form" action="" method="POST">
+            <label for="a7iii_quantity_textbox">Quantity</label>
+            <input type="text" id="a7iii_quantity_textbox" onkeyup="">
+            <input type="submit" value="Purchase">
+        </form>
+      </div>
+<br>
+      <div class="card">
+        <img src="./images/a7RIV.jpeg" alt="Sony a7R IV" style="width:100%">
+        <h1>Sony a7R IV</h1>
+        <p class="price">$2999.99</p>
+        <p>Sony's better mirrorless camera</p>
+        <form name="a7Riv_quantity_form" action="" method="POST">
+            <label for="a7Riv_quantity_textbox">Quantity</label>
+            <input type="text" id="a7Riv_quantity_textbox" onkeyup="">
+            <input type="submit" value="Purchase">
+        </form>
+      </div>
+<br>
+      <script src="javascript/products_data.js"></script>
+</body>
+</html>
