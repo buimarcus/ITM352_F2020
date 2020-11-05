@@ -1,4 +1,5 @@
 <script>
+
     function isNonNegInt(stringToCheck, returnErrors = false) {
         errors = []; // assume no errors at first
         if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
@@ -9,12 +10,12 @@
             }
     
             function checkQuantityTextbox() {
-                errs = isNonNegInt[fivedm4_quantity_textbox.value, eosr6_quantity_textbox.value, eos1dx_quantity_textbox.value, a7iii_quantity_textbox.value,  a7Riv_quantity_textbox.value, true];
+                errs = isNonNegInt (quantity_form.quantity_textbox.value, true) ;
                 quantity_textbox_message.innerHTML = errs.join(", ");
             }    
     
             function displayPurchase() {
-                userInput = (fivedm4_quantity_textbox.value + eosr6_quantity_textbox.value + eos1dx_quantity_textbox.value + a7iii_quantity_textbox.value +  a7Riv_quantity_textbox.value);
+                userInput = quantity_form.quantity_textbox.value;
                 if (isNonNegInt(userInput)) {
                     document.write(`Thank you for purchasing ${userInput} cameras!`)
                 }
@@ -103,9 +104,9 @@
         <h1>Sony a7 III</h1>
         <p class="price">$1899.99</p>
         <p>Sony's less good mirrorless camera</p>
-        <form name="a7iii_quantity_form" action="" method="POST">
-            <label for="a7iii_quantity_textbox">Quantity</label>
-            <input type="text" id="a7iii_quantity_textbox" onkeyup="checkQuantityTextbox()">
+        <form name="quantity_form" action="" method="POST">
+            <label for="quantity_textbox">Quantity</label>
+            <input type="text" id="quantity_textbox" onkeyup="checkQuantityTextbox(this)">
         </form>
       </div>
     </div>
