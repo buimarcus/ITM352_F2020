@@ -1,0 +1,136 @@
+<script>
+
+    function isNonNegInt(stringToCheck, returnErrors = false) {
+        errors = []; // assume no errors at first
+        if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
+        if (stringToCheck < 0) errors.push('Negative value!'); // Check if it is non-negative
+        if (parseInt(stringToCheck) != stringToCheck) errors.push(' Not an integer!'); // Check that it is an integer
+    
+            return returnErrors ? errors : (errors.length == 0);
+            }
+    
+            function checkQuantityTextbox() {
+                errs = isNonNegInt (quantity_form.quantity_textbox.value, true) ;
+                quantity_textbox_message.innerHTML = errs.join(", ");
+            }    
+    
+            function displayPurchase() {
+                userInput = quantity_form.quantity_textbox.value;
+                if (isNonNegInt(userInput)) {
+                    document.write(`Thank you for purchasing ${userInput} cameras!`)
+                }
+            }
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Shop</title>
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Roboto" rel="stylesheet">
+    <link href="products-style.css" rel="stylesheet">
+    <link href="mainMenu-style.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>PURCHASE THE TOP CAMERAS OUT NOW!</h1>
+    </header>
+    <nav>
+        <ul id="mainMenu"> 
+            <li class="selected"><a href="index.html">Home</a></li>
+        </ul>  
+    </nav>
+    <br>
+    <br>
+    <br>
+
+    <div>
+    <b>
+            OUR SHIPPING POLICY IS:
+            <br>
+            A subtotal $0 - $49.99 will be $2 shipping
+            <br>
+            A subtotal $50 - $99.99 will be $5 shipping
+            <br>
+            Subtotals over $100 will be charged 5% of the subtotal amount
+        </b> </div>
+    <br>
+    <div class="row">
+    <div class="column">
+    <div class="card">
+        <img src="./images/canon5dm4.jpg" alt="Canon 5D Mark IV" style="width:100%">
+        <h1>Canon 5D Mark IV</h1>
+        <p class="price">$3339.00</p>
+        <p>4th edition of the famous Canon 5D</p>
+
+        <!--replaced the "Add to Cart" from w3schools with a quantity submission-->
+        <form name="fivedm4_quantity_form" action="" method="POST">
+            <label id="quantity_label">Quantity</label>
+            <input type="text" id="fivedm4_quantity_textbox" onkeyup="checkQuantityTextbox()">
+        </form>
+      </div>
+    </div>
+
+<div class="column">
+      <div class="card">
+        <img src="./images/canonr6.jpg" alt="Canon EOS R6" style="width:100%">
+        <h1>Canon EOS R6 </h1>
+        <p class="price">$2499.00</p>
+        <p>Canon's best mirrorless camera</p>
+        <form name="eosr6_quantity_form" action="" method="POST">
+            <label for="eosr6_quantity_textbox">Quantity</label>
+            <input type="text" id="eosr6_quantity_textbox" onkeyup="checkQuantityTextbox()">
+        </form>
+      </div>
+    </div>
+
+<div class="column">
+      <div class="card">
+        <img src="./images/canon1dx.jpeg" alt="Canon EOS 1D X" style="width:100%">
+        <h1>Canon EOS 1D X</h1>
+        <p class="price">$5299.00</p>
+        <p>The most expensive DSLR ever</p>
+        <form name="eos1dx_quantity_form" action="" method="POST">
+            <label for="eos1dx_quantity_textbox">Quantity</label>
+            <input type="text" id="eos1dx_quantity_textbox" onkeyup="checkQuantityTextbox()">
+        </form>
+      </div>
+    </div>
+<br>
+<div class="column">
+      <div class="card">
+        <img src="./images/a7iii.jpeg" alt="Sony a7 III" style="width:100%">
+        <h1>Sony a7 III</h1>
+        <p class="price">$1899.99</p>
+        <p>Sony's less good mirrorless camera</p>
+        <form name="quantity_form" action="" method="POST">
+            <label for="quantity_textbox">Quantity</label>
+            <input type="text" id="quantity_textbox" onkeyup="checkQuantityTextbox(this)">
+        </form>
+      </div>
+    </div>
+<br>
+<div class="column">
+      <div class="card">
+        <img src="./images/a7RIV.jpeg" alt="Sony a7R IV" style="width:100%">
+        <h1>Sony a7R IV</h1>
+        <p class="price">$2999.99</p>
+        <p>Sony's better mirrorless camera</p>
+        <form name="a7Riv_quantity_form" action="" method="POST">
+            <label for="a7Riv_quantity_textbox">Quantity</label>
+            <input type="text" id="a7Riv_quantity_textbox" onkeyup="checkQuantityTextbox()">
+        </form>
+      </div>
+    </div>
+<br>
+<div class="column">
+      <div class="card">
+        <img src="./images/cart.png" style="width: 50%;">
+        <input type="button" value="Checkout" onclick="location.href='invoice.html'">
+      </div>
+    </div>
+</div>
+      <script src="javascript/products_data.js"></script>
+</body>
+</html>
