@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Shop</title>
+    <style>
+        /* source: SmartPhoneProducts WOD */
+        img {
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          padding: 5px;
+          width: 5px;
+        }
+    
+        /* Add a hover effect (blue shadow) */
+        img:hover {
+          box-shadow: 0 0 5px 5px #e6f3ff;
+        }
+      </style>
+    <!--Linking for fonts and CSS files-->
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Roboto" rel="stylesheet">
+    <link href="products-style.css" rel="stylesheet">
+    <link href="mainMenu-style.css" rel="stylesheet">
+</head>
+<body>
+
+    <!--Main Header-->
+    <header>
+        <h1>Marcus' Camera Shop</h1>
+       
+    </header>
+
+    <!--Navigation Bar code-->
+    <nav>
+        <ul id="mainMenu"> 
+            <li class="selected"><a href="products_page.html">Enter Shop</a></li>
+        </ul>  
+    </nav>
+  
+
+    <div class="slideshow-container">
+
+        <div class="mySlides">
+          <img src="./images/canon5dm4.jpg" style="width:100%">
+          <div class="text">Canon 5D Mark IV</div>
+        </div>
+  
+        <div class="mySlides">
+          <img src="./images/canonr6.jpg" style="width:100%">
+          <div class="text">Canon EOS R6</div>
+        </div>
+  
+        <div class="mySlides">
+          <img src="./images/canon1dx.jpeg" style="width:100%">
+          <div class="text">Canon EOS 1D X</div>
+        </div>
+
+        <div class="mySlides">
+            <img src="./images/a7iii.jpeg" style="width:100%">
+            <div class="text">Sony a7 III</div>
+          </div>
+
+          <div class="mySlides">
+            <img src="./images/a7RIV.jpeg" style="width:100%">
+            <div class="text">Sony a7R IV</div>
+          </div>
+  
+      </div>
+  
+      <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <script>
+        var slideIndex = 0;
+        showSlides();
+  
+        // slideshow function, from W3 Schools
+        function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) { slideIndex = 1 }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex - 1].style.display = "block";
+          dots[slideIndex - 1].className += " active";
+          setTimeout(showSlides, 2000); // changes image every 2 seconds
+        }
+      </script>
+</body>
+</html>
