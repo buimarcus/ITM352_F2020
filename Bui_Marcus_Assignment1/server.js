@@ -12,6 +12,7 @@ app.all('*', function (request, response, next) {
 
 app.use(myParser.urlencoded({ extended: true }));
 
+
 // if values are valid go to invoice, if not, redirect back to shop section
 app.get("/process_page", function (request, response) {
    //check for valid quantities
