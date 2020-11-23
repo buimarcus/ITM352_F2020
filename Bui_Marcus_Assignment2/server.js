@@ -1,6 +1,6 @@
-// Source: Jasmine Olmos, Mark Chou, Lab13
+
 const querystring = require('querystring');
-var express = require('express'); // Express helps to handle multiple http requests, code for server
+var express = require('express'); // express helps to handle multiple http requests, code for server
 var myParser = require("body-parser"); //code for server
 var products = require("./public/products_data.js"); // require data from javascript file
 var filename = 'user_data.json';
@@ -9,12 +9,6 @@ var qs = require('querystring');
 var querystr = {};
 var camera_quantity = {};
 
-
-/* app.all('*', function (request, response, next) {
-   console.log(request.method + ' to ' + request.path);
-   next();
-});
-*/
 
 app.use(myParser.urlencoded({ extended: true }));
 
@@ -69,7 +63,7 @@ if (fs.existsSync(filename)) {
    users_reg_data = JSON.parse(data);
 }
 
-// open login page
+// processes login page
 app.get("/login.html", function (request, response) {
    str = `
    <html lang="en">
@@ -162,27 +156,27 @@ response.send(str);
       });
 
 app.post("/login.html", function (request, response) {
-         // Process login form POST and redirect to logged in page if ok, back to login page if not
+         // processes the login form POST and redirects to invoice page if valid, goes back to login page if not valid
          console.log(camera_quantity);
          the_username = request.body.username;
          console.log(the_username, "Username is", typeof (users_reg_data[the_username]));
-         //validate login data
+         // validate login data
          if (typeof users_reg_data[the_username] != 'undefined') {
-            //To check if the username exists in the json data
+            // checks if the username exists in the json data
             if (users_reg_data[the_username].password == request.body.password) {
-               //make the query string of prod quant needed for invoice
+               // make the query string of product quantity needed for the invoice
                theQuantQuerystring = qs.stringify(camera_quantity);
                response.redirect('/invoice.html?' + theQuantQuerystring + `&username=${the_username}`);
              
             } else {
-               response.redirect('./login.html?')
+               response.redirect('./login.html?');
                
             }
          }
       });
 
-      app.get("/registration.html", function (request, response) {
-         // Give a simple register form
+      app.get("./public/registration.html", function (request, response) {
+         // process registration form
       
          str = `
          <html lang="en">
@@ -196,22 +190,7 @@ app.post("/login.html", function (request, response) {
              <link href="products-style.css" rel="stylesheet">
              <script>src ="server.js"</script>
          </head>
-         <script>
-             var password = document.getElementById("password") //turns password into an object
-             ,repeat_password = document.getElementById("repeat_password"); //turns repeat password into an object
-             
-             function validatePassword(){
-               if(password.value != repeat_password.value) { //if password is not equal to repeat password, say passwords don't match
-                 alert("Passwords do not match.");
-             response.redirect('public/registration.html') 
-               } 
-             else{
-                 response.redirect('Login_Successful') 
-             }
-           
-             }
-               validatePassword();
-           </script>
+      
          <body>
              <style>
                  /* Styling from w3schools webpage template below */
@@ -286,17 +265,21 @@ app.post("/login.html", function (request, response) {
                });
 
                app.post("/registration.html", function (request, response) {
-                  // process a simple register form
+                  // process a simple registration form
                   console.log(camera_quantity);
                   the_username = request.body.username;
                   console.log(the_username, "Username is", typeof (users_reg_data[the_username]));
                
-                  username = request.body.username;//Save new user to file name (users_reg_data)
+                  username = request.body.username;// save new user to file name (users_reg_data)
                
-                  errors = [];//Checks to see if username already exists
+                  errors = [];// checks if username already exists
                
                   if (typeof users_reg_data[username] != 'undefined') {
-                     errors.push("Username is Already Taken");
+                     errors.push("Please choose a different Username");
+                  }
+                  
+                  if (request.body.password !== request.body.repeat_password) {
+                    errors.push('Passwords do not match')
                   }
                
                   console.log(errors, users_reg_data);
@@ -323,3 +306,5 @@ app.post("/login.html", function (request, response) {
 
 app.use(express.static('./public'));
 app.listen(8080, () => console.log(`listening on port 8080`));
+
+// Source: Lab14, Assignment2 Example, Mark Chou, Jasmine Olmos
