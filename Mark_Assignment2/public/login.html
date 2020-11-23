@@ -1,0 +1,49 @@
+<!-- Mark Chou & Faye Miguel -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Marikit Login Page</title>
+
+    <link href="product_style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--the following codes is for the navigation bar-->
+    <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./product_page.html">Collection</a></li>
+            <li><a class="active" href="./login.html">Log In</a></li>
+    </ul>
+
+    <!--this code puts the whole body of the website not overlapping the navbar-->
+    <div style="margin-left:25%;padding:1px 16px;height:1000px;">
+
+        <h1>Marikit</h1>
+        <h2> Log in to Continue to your Purchase!</h2>
+        <form name="loginform" method="POST">
+            <div>
+                <input type="text" name="username" size="40" placeholder="enter username"><br />
+                <input type="password" name="password" size="40" placeholder="enter password"><br />
+                <input type="submit" value="login" id="submit"> </div>
+        </form>
+</body>
+
+<h2>No Account? Join Us Below!</h2>
+
+<body>
+    <div>
+        <form action="./registration.html">
+        <input type="submit" class="button" value="Create Account Here" id="regpage" name="register_here">
+        </form>
+    </div>
+    
+    </body>
+    
+    <script>
+    regpage.href = "registration.html" + document.location.search;
+    loginform.action = "./login" + document.location.search;
+    </script>
+    </html>

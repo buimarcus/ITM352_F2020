@@ -1,0 +1,80 @@
+<!--Author: Mark Chou & Faye Miguel -->
+<!--Resources: https://www.w3schools.com-->
+<!--This page has the code for the home page of the e-Commerce Website-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Marikit</title>
+    <link rel="stylesheet" href="product_style.css">
+    <style id=localstyle>
+            img {
+            width: 500px;
+            height: 500px;
+        }</style>
+</head>
+
+<body>
+    <!--the following codes is for the navigation bar-->
+    <ul>
+        <li><a class="active" href="./index.html">Home</a></li>
+        <li><a href="./product_page.html">Collection</a></li>
+        <li><a href="./login.html">Log In</a></li>
+    </ul>
+
+    <!--this code puts the whole body of the website not overlapping the navbar-->
+    <div style="margin-left:25%;padding:1px 16px;height:1000px;">
+    
+    <!--Welcoming the customers on the webpage-->
+    <h1 style="text-align: center">ALOHA</h1>
+    <h2 style="text-align: center">Welcome to Marikit!</h2>
+
+    <div class="slideshow-container" style="text-align: center">
+
+        <div class="mySlides fade">
+            <img src="./images/bracelet1.png">
+        </div>
+        <div class="mySlides fade">
+            <img src="./images/bracelet2.png">
+        </div>
+        <div class="mySlides fade">
+            <img src="./images/bracelet3.png">
+        </div>
+        <div class="mySlides fade">
+            <img src="./images/bracelet4.png">
+        </div>
+        <div class="mySlides fade">
+            <img src="./images/bracelet5.jpg">
+        </div>
+
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <script>
+    //The following javascript code below allows the whole code above to return value as a slideshow animation
+        var slideIndex = 0;
+        showSlides();
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";}
+                slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");}
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 4000);}
+    </script>
+</body>

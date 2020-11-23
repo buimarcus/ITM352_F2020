@@ -1,18 +1,20 @@
 // Source: Jasmine Olmos, Mark Chou, Lab13
-const querystring = require('query-string');
+const querystring = require('querystring');
 var express = require('express'); // Express helps to handle multiple http requests, code for server
 var myParser = require("body-parser"); //code for server
 var products = require("./public/products_data.js"); // require data from javascript file
-var camera_quantity = {};
 var filename = 'user_data.json';
-var qs = require('query-string');
-var querystr = {};
-
 var app = express();
-app.all('*', function (request, response, next) {
+var qs = require('querystring');
+var querystr = {};
+var camera_quantity = {};
+
+
+/* app.all('*', function (request, response, next) {
    console.log(request.method + ' to ' + request.path);
    next();
 });
+*/
 
 app.use(myParser.urlencoded({ extended: true }));
 
@@ -60,7 +62,8 @@ function isNonNegInt(q, returnErrors = false) {
 fs = require('fs'); // files system module
 
 if (fs.existsSync(filename)) {
-   stats = fs.statSync(filename);
+   stats = fs.statSync(filename)
+
    data = fs.readFileSync(filename, 'UTF-8');
    console.log(typeof data);
    users_reg_data = JSON.parse(data);
@@ -189,6 +192,7 @@ response.send(str);
              <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
              <link href="products-style.css" rel="stylesheet">
+             <script>src ="server.js"</script>
          </head>
          <script>
              var password = document.getElementById("password") //turns password into an object

@@ -1,0 +1,120 @@
+<!--Author: Faye Miguel & Mark Chou-->
+<!--Resources: https://www.w3schools.com, SmartPhoneProducts, Assignment1, Lab13, Mark Chou helped me on checking the quantity-->
+<!--This page has the code for the products and how to put products in cart-->
+
+<script src="product_data.js"></script>
+<script>
+    function isNonNegInt(q, return_errors = false) {
+        errors = [];
+        if (q == '') q = 0;
+        //The code checks if the value is a number
+        if (Number(q) != q) errors.push('<font color="red">Please enter a number.</font>');
+        //This checks if the value is a positive number        
+        else if (q < 0) errors.push('<font color="red">Please enter a positive value.</font>');
+        //This checks if the value is a whole number
+        else if (parseInt(q) != q) errors.push('<font color="red">Please enter a whole number.</font>');
+        return return_errors ? errors : (errors.length == 0);
+    }
+    function checkQuantityTextbox(theTextbox) {
+        errs = isNonNegInt(theTextbox.value, true);
+        if (errs.length == 0) errs = ['Quantity:'];
+        if (theTextbox.value.trim() == '') errs = ['Quantity'];
+        document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
+    }
+    window.onload = function () {
+        // This code gets the query string and form data.
+        let params = (new URL(document.location)).searchParams;
+        // When the form is submitted, the following code will check if the quantities are valid then it redirects to cart.
+        if (params.has('purchase_submit')) {
+        // Assuming that the quantity is valid and no errors.
+            has_errors = false;
+        // This will check if any quantity is selected by having the number more than 0.
+            total_qty = 0; 
+            for (i = 0; i < products.length; i++) {
+            if (params.has(`quantity${i}`)) {
+                a_qty = params.get(`quantity${i}`);
+        // This code makes the textboxes sticky in case of invalid data
+            product_selection_form[`quantity${i}`].value = a_qty;
+            total_qty += a_qty;
+            if (!isNonNegInt(a_qty)) {
+                has_errors = true;
+                checkQuantityTextbox(product_selection_form[`quantity${i}`]);
+                    }
+                }
+            }
+        //The following gives a message if there is an error or redirect to cart if values are valid
+            if (has_errors) {
+                alert("Re-try and Please enter a valid quantity.");
+            } else if (total_qty == 0) {
+        //Message for no quantities chosen.
+                alert("Re-try and Please select a quantity for the item you want to purchase.");
+            } else {
+        // The following codes allow to redirect to invoice when quantities are valid
+        window.location = `./login.html${document.location.search}`;
+                window.stop;
+                     }
+                 }
+             } 
+         
+         </script>
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Marikit</title>
+    <link rel="stylesheet" href="product_style.css">
+    <style id=localstyle>
+        .item img {
+    width: 150px;
+    height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="product_selection_form" action="process_page" method="GET">
+    <!--the following codes is for the navigation bar-->
+    <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a class="active" href="./product_page.html">Collection</a></li>
+        <li><a href="./login.html">Log In</a></li>
+    </ul>
+
+    <!--this code puts the whole body of the website not overlapping the navbar-->
+    <div style="margin-left:25%;">
+<br>
+
+    <!--Consistent title with same format for all pages-->
+    <h1 style="text-align: center">Fall 2019 Collection</h1>
+<!--the following code shows the different products with the pictures and prices-->
+<div style="text-align: center">
+        <main>
+        <script>
+            for (i = 0; i < products.length; i++) {
+                document.write(`
+        <section class="item">
+            <h2>${products[i].bracelet}</h2>
+            <h3>$${products[i].price}</h3>
+            <img src="./images/${products[i].image}">
+                <br>
+            <label id="quantity${i}_label"}">Quantity:</label>
+            <input type="text"
+                placeholder="0"
+                name="quantity${i}" 
+                onkeyup="checkQuantityTextbox(this);">
+        </section>
+        `);}    
+        </script>
+        </main>
+            <br>
+        <!--This code allows to submit a form-->
+        <input type="submit"
+        class="button"
+        name="purchase_submit"
+        value="ADD TO CART">
+</div>
+</form>
+</body>
