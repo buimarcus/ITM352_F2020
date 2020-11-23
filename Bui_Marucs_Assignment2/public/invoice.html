@@ -2,6 +2,11 @@
 <script>
   // Source: Mark Chou (friend)
   let params = (new URL(document.location)).searchParams;
+
+  if(params.has('username')) {
+    alert(`Thank you for shopping with us ${params.get('username')}!`);
+  }
+
   var quantities = [];
   if (params.has('checkout_submit')) {
     for (i = 0; i < products.length; i++) {

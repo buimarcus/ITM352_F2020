@@ -160,7 +160,7 @@ app.get("/login.html", function (request, response) {
 response.send(str);
       });
 
-      app.post("/login.html", function (request, response) {
+app.post("/login.html", function (request, response) {
          // Process login form POST and redirect to logged in page if ok, back to login page if not
          console.log(camera_quantity);
          the_username = request.body.username;
@@ -183,7 +183,8 @@ response.send(str);
       app.get("/registration.html", function (request, response) {
          // Give a simple register form
       
-         str = `<html lang="en">
+         str = `
+         <html lang="en">
          <head>
              <meta charset="UTF-8">
              <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -276,7 +277,7 @@ response.send(str);
                             
                                <input type="submit" value="Register" id="submit">
                            </form></div>
-                        
+         </body>               
          </html>
          `;
          response.send(str);
