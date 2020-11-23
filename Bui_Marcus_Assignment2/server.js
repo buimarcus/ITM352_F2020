@@ -135,23 +135,24 @@ app.get("/login.html", function (request, response) {
           </div>
         </div>
         <br>
-<div style="margin-left:auto;margin-right: auto;padding:1px 16px;height:1000px;">
+<div class="card">
 
     <form name="loginform" method="POST">
         <div>
+            <br>
             <input type="text" name="username" size="40" placeholder="username"><br />
             <input type="password" name="password" size="40" placeholder="password"><br/>
+            <br>
             <input type="submit" value="Login" id="submit"> </div>
     </form>
 </body>
-<br>
-<h3>Click below to create an account</h3>
 
 <body>
 <div>
     <form action="./registration.html">
     <input type="submit" class="button" value="Create Account" id="regpage" name="register_here">
     </form>
+    <br>
 </div>
 
 </body>
@@ -267,8 +268,9 @@ app.post("/login.html", function (request, response) {
                  <div style="margin-left:auto;margin-right: auto;padding:1px 16px;height:1000px;">
          
                      <!--textboxes for registration input. pattern specifies what characters are necessary for given textboxes.-->
-                     <div>
+                     <div class="card">
                              <form  method="POST" action="" onsubmit=validatePassword() >
+                             <br>
                                <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30" placeholder="First & Last Name"><br />
                                <input type="text" name="username" size="40" pattern=".[a-z0-9]{3,10}" required title="Minimum 4 Characters, Maximum 10 Characters, Numbers/Letters Only" placeholder="Username" ><br />
                                <input type="email" name="email" size="40" placeholder="Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Please enter valid email."><br />
