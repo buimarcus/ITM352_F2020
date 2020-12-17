@@ -1,0 +1,149 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Tyler Johnson">
+    <meta name="description" content="Displays products">
+    <!-- Add responsive design on smaller screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Import Bootstrap CSS library -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Own CSS style -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Lululemon Store</title>
+
+    <script src="./functions.js"></script>
+    <script>
+
+
+        // get the query string
+        let params = (new URL(document.location)).searchParams;
+        if (params.has('products_key')) {
+            var products_key = params.get('products_key');
+        } else {
+            document.write('no products key in query string');
+            document.stop;
+        }
+
+        var products_data;
+        loadJSON('get_products_data', function (response) {
+            // Parsing JSON string into object
+            products_data = JSON.parse(response);
+        });
+ //Referenced from assignment 1 examples
+ function isNonNegInt(q, return_errors = false) {
+        errors = []; // will assume there are no errors
+        if (q == '') q = 0; // handle blank inputs as if they are 0
+        if (Number(q) != q) errors.push('<font color="red">Not a number! :(</font>'); // Check if string is a number value
+        else if (q < 0) errors.push('<font color="red">Negative value! :(</font>'); // Check if it is non-negative
+        else if (parseInt(q) != q) errors.push('<font color="red">Not an integer! :(</font>'); // Check that it is an integer
+        return return_errors ? errors : (errors.length == 0); // If no errors, do not show "invalid quantity" text
+    }
+    //Modified from Lab12 --> shows errors next to quantity textbox if there are invalid quantities entered
+    function checkQuantityTextbox(theTextbox) {
+        errs = isNonNegInt(theTextbox.value, true);
+        if (errs.length == 0) errs = ['You want:']; //If there's no errors, replace "Quantity" with "You want:" text
+        if (theTextbox.value.trim() == '') errs = ['Quantity'];
+        document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", "); // Show errors if there's invalid quantitiesf
+    }
+    window.onload = function () {
+        let params = (new URL(document.location)).searchParams; // get the query string which has the form data
+        // form was submitted so check that quantities are valid then redirect to invoice if ok
+        if (params.has('purchase_submit_button')) {
+            has_errors = false; // assume quantities are valid//
+            total_qty = 0; // need to check if something was selected so we will look if the total > 0
+            //For every product in the array, write the product number, display its image and name, and list price
+            for (i = 0; i < products.length; i++) {
+                if (params.has(`quantity${i}`)) {
+                    a_qty = params.get(`quantity${i}`);
+                    // make textboxes sticky in case of invalid data
+                    product_form[`quantity${i}`].value = a_qty;
+                    total_qty += a_qty;
+                    if (!isNonNegInt(a_qty)) {
+                        has_errors = true; // invalid quantity
+                        checkQuantityTextbox(product_form[`quantity${i}`]); // show where the error is
+                    }
+                }
+            }
+            // Now respond to errors or redirect to invoice//
+            if (has_errors) {
+                alert("Please enter only valid quantities!");
+            } else if (total_qty == 0) { //general alert//
+                alert("Please select some quantities!");
+            } else { // all good//
+                window.location = `./invoice.html${document.location.search}`; //Redirects itself
+                window.stop;
+            }
+        }
+    }
+        
+    </script>
+</head>
+<center>
+    <FORM action="/" method="POST">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="./imgs/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item ml-auto">
+                    <input type="submit" value="Purchase" name="purchase_submit_button">
+                </li>
+                <li class="nav-item ml-auto" href="#">
+                    <INPUT TYPE="SUBMIT"  name="Submit" value="Add to Cart">
+                    </FORM>
+                
+    <script> nav_bar(products_key, products_data);</script>
+</center>
+
+
+<div class="container">
+    <div class="row justify-content-center text-center">
+        <div class="log-in">LULULEMON PRODUCTS</div>
+    </div>
+    <div class="row">
+        <script>
+
+            // This function takes a string assumed to be a key in the products array above to display and select the corresponding products
+            var order_str = '';
+            // get the particular products to display
+            products = products_data[products_key];
+            if (params.has('Submit')) {
+                // grab the quantities from the query string
+                order_str = 'Your order is:<br>';
+                for (i = 0; i < products.length; i++) {
+                    order_str += `You want ${params.get(`quantities[${i}]`)} of ${products[i]['model']}<br>`;
+                }
+            } else {
+        
+                order_str += `
+                <div class="container">
+    <div class="row justify-content-center text-center">
+                <h1>Please select what ${products_key} you want</h1><br>
+            </div>
+    <div class="row">
+                `;
+                // We put the whole table in the form so that anything entered in it will get submitted
+
+                for (i = 0; i < products.length; i++) { //Main page content
+                    order_str += `
+                    <div class="card col-3">
+                        <img class="card-img-top" src="./imgs/${products[i]['image']}" alt="Card image cap">
+                        <div class="card-body">
+       
+                            <span class="card-text float-left"> ${products[i]['model']}
+                                <br> <p style="color:#8695A5">${products[i]['color']}</p></span>
+                            <span class="price float-right">$${products[i]['price']}</span>
+                        </div>         
+                            <label id="products${i}_label"}>Quantity</label>
+                            <input type="text" placeholder="0" name="quantity${i}"conkeyup="checkQuantityTextbox(this);">
+                            </div>
+                            `;
+                }
+                order_str += `
+                 `;
+            } // this closes the else for the form and table display
+            document.write(order_str);
+        </script>
+    </div>
+</div>

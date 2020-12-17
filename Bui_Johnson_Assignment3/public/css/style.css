@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Calibre', 'Helvetica Neue', 'Helvetica,Roboto', 'Arial', 'sans-serif';
+  }
+  
+  .navbar-brand {
+    padding-left: 1rem;
+  }
+  
+  .nav-item, .new-user {
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: .075rem;
+    padding: 1.1rem;
+  }
+  
+  .card-text {
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: .075rem;
+  }
+  
+  .price {
+    font-weight: 400;
+  }
+  
+  .nav-link {
+    color: black !important; /* needs !important to override Bootstrap CSS */
+  }
+  
+  .col {
+    padding: 1em !important;
+  }
+  
+  .card {
+    margin: 1em;
+    width: 10rem !important;
+    border: none;
+    flex-basis: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    max-width: 40%;
+  }
+  
+  /* CSS for log-in */
+  .log-in-picture {
+    width: 50%;
+    height: auto;
+    padding: 2rem;
+  }
+  
+  .log-in {
+    padding: 1rem;
+    font-size: 55px;
+    letter-spacing: .075rem;
+    font-weight: 500;
+  }
+  
+  .please-log-in {
+    letter-spacing: .075rem;
+    padding: 1.1rem;
+  }
+  
+  .log-in-button {
+    font-size: 20px;
+    margin: 1rem;
+  }
+  
+  .register > input {
+    margin: 10px;
+  }

@@ -1,0 +1,79 @@
+<!-- Login page referenced from w3 schools -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script>
+        let params = (new URL(document.location)).searchParams;
+
+        window.onload = function () { //Alert for invalid usernames/passwords
+            if (params.has('LogError')) {
+                alert('Invalid Username or Passowrd');
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Import Bootstrap CSS library -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Own CSS style -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="./imgs/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tyler's Lululemon Store :)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">BACK TO PRODUCTS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">|</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">TYLER JOHNSON</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">ITM 352</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="log-in">LOG INTO LULULEMON</div>
+        </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-6">
+                <div class="please-log-in">PLEASE LOG IN TO CONTINUE</div>
+                <form name="login" action="process_login" method="POST">
+                    <div class="container"><br>
+                        <input type="text" name="username" id="username" size="40" placeholder="USERNAME" required><br>
+                        <input type="password" name="password" size="40" placeholder="PASSWORD" onkeyup="" required><br>
+                        <input class="log-in-button" type="submit" value="Login" name="login">
+                    </div>
+                </form>
+                <script>
+                    login.action += document.location.search; // action plus the query string so info won't be lost from the intitial display page
+                </script>
+
+                <div class="new-user">NEW USER? REGISTER BELOW</div>
+                <input type="button" name="newuser" value="New User"
+                    onclick="window.location='./register.html' + document.location.search;" class='register'>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
