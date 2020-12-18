@@ -47,7 +47,8 @@ app.get("/get_cart", function (request, response) {
 });
 
 app.post("/", function (request, response) {
-    response.cookie('cart', request.body).redirect("./cart.html"); //sets cookie to have key of “cart” and value of the request which would be the data passed in from the post request
+    response.cookie('cart', request.body).redirect('./cart.html'); //sets cookie to have key of “cart” and value of the request which would be the data passed in from the post request
+
 });
 
 

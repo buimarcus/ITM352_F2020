@@ -20,4 +20,5 @@ function nav_bar(this_product_key, products_data) {
         if (products_key == this_product_key) continue;
         document.write(`<a href='./display_products.html?products_key=${products_key}'>${products_key}<a>&nbsp&nbsp&nbsp;`);
     }
-}
+};
+

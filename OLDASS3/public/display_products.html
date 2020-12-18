@@ -90,7 +90,7 @@
                     <input type="submit" value="Purchase" name="purchase_submit_button">
                 </li>
                 <li class="nav-item ml-auto" href="#">
-                    <INPUT TYPE="SUBMIT"  name="Submit" value="Add to Cart">
+                    
                     </FORM>
                 
     <script> nav_bar(products_key, products_data);</script>
@@ -127,6 +127,7 @@
 
                 for (i = 0; i < products.length; i++) { //Main page content
                     order_str += `
+                    <form action="/" method="POST">
                     <div class="card col-3">
                         <img class="card-img-top" src="./imgs/${products[i]['image']}" alt="Card image cap">
                         <div class="card-body">
@@ -137,8 +138,9 @@
                             </div>     
                             <label id="quantity${i}_label"}>Quantity</label>
                             <input type="text" placeholder="0" name="quantity${i}" onkeyup="checkQuantityTextbox(this);">
+                            <input type="submit"  name="Submit" value="Add to Cart">
                             </div>
-                            
+                            </form>
                             `;
                 }
                 order_str += `
