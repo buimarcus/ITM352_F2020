@@ -1,0 +1,186 @@
+<!-- Registration page referenced from w3 Schools and lab 14 -->
+<html lang="en">
+
+<head>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+
+        window.onload = function () { // creating the function for window.onload
+            //if there are errors in the registration data it will notify the user
+            if (params.has('errors')) {
+
+                console.log("invalid");
+                alert('Fix the following errors: \n' + params.get('errors'));
+            }
+        }    
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Own CSS style -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Registration Page</title>
+
+    <!-- Import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+     <!-- Import Bootstrap CSS library -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- Import Semantic UI CSS library to help format website design  -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+</head>
+
+<body>
+     <!-- Import Semantic UI JS library to help format website design  -->
+     <script
+     src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+     integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+     crossorigin="anonymous"
+   ></script>
+
+   <!-- Import Bootstrap JS library to help format website design  -->
+   <script
+     src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+     crossorigin="anonymous"
+   ></script>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="./imgs/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tyler's Lululemon Store :)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">BACK TO PRODUCTS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">|</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">TYLER JOHNSON</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">ITM 352</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="log-in">
+                <h1 class="log-in-header">HELLO :) NEW USER</h1>
+            </div>
+        </div>
+
+        <div class="row justify-content-center text-center">
+            <!-- Creates registration form, from w3 schools -->
+            <form class="ui form" onsubmit="return process_register(this)" name="Register">
+                <script>
+                    function process_register(e) {
+                        if(e.password.value != e.repeatPassword.value) {
+                            let messageElem = document.getElementById('message');
+                            let text = "<div class=\"ui negative message\">Passwords do not match, pleaser enter them again</div>"
+                            messageElem.innerHTML = text;
+                        }
+                        else {
+                            let users = JSON.parse(localStorage.getItem('users'));
+
+                            if(users === null) {
+                                let user = {};
+                                user[e.username.value] = {};
+                                user[e.username.value].name = e.fullname.value;
+                                user[e.username.value].email = e.email.value;
+                                user[e.username.value].password = e.password.value;
+                                localStorage.setItem('users', JSON.stringify(user));
+                                if((new URL(document.location)).searchParams.has('cart')) {
+                                    window.location.href = "./invoice.html";
+                                }
+                                else {
+                                    window.location.href = "./index.html";
+                                }
+                            }
+                            else if(users[e.username.value] != null){
+                                let messageElem = document.getElementById('message');
+                                let text = "<div class=\"ui negative message\">Username already exists, pleaser enter another username</div>"
+                                messageElem.innerHTML = text;
+                            }
+                            else {
+                                users[e.username.value] = {};
+                                users[e.username.value].name = e.fullname.value;
+                                users[e.username.value].email = e.email.value;
+                                users[e.username.value].password = e.password.value;
+                                console.log(users);
+                                localStorage.setItem('users', JSON.stringify(users));
+                                if((new URL(document.location)).searchParams.has('cart')) {
+                                    window.location.href = "./invoice.html?cart";
+                                }
+                                else {
+                                    window.location.href = "./index.html";
+                                }
+                            }
+                        }
+                        return false;
+                    }
+                </script>
+                <div class="field">
+                    <label>First & Last Name: (Ex. John Foo) </label>
+                    <input type="text" name="fullname" size="50" pattern="[a-zA-Z]+\s[a-zA-Z]+\s*[a-zA-Z]*"
+                        placeholder="Enter First & Last Name" required>
+                </div>
+
+                <br />
+
+                <!-- placeholder for registration (first & last name) -->
+                <div class="field">
+                    <label>Username: </label>
+                    <input type="text" name="username" size="50" pattern=".[a-z0-9]{3,10}" required
+                        title="Minimum 4 Characters, Maximum 10 Characters, Numbers/Letters Only"
+                        placeholder="Enter Username">
+                </div>
+                
+                <br /> 
+        
+                <!-- Username placeholder -->
+                <div class="field">
+                    <label>Email: </label>
+                    <input type="email" name="email" size="50" placeholder="Enter Email"
+                        pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Please enter valid email.">
+                </div>
+                    
+                <br />
+                <!-- Characters able to input -->
+                <div class="field">
+                    <label>Password: </label>
+                    <input type="password" id="password" name="password" size="50" pattern=".{6,}" required
+                        title="6 Characters Minimum" placeholder="Enter Password">
+                </div>
+                    
+                <br />
+                <div class="field">
+                    <label>Repeat Password: </label>
+                    <input type="password" id="repeat_password" name="repeatPassword" size="50" pattern=".{6,}" required
+                        title="6 Characters Minimum" placeholder="Repeat Password">
+                </div>
+                    
+                <br />
+
+                <input class="log-in-button" type="submit" value="Register" id="submit">
+                <div id="message"></div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

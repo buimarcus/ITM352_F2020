@@ -1,0 +1,92 @@
+<!-- Registration page referenced from w3 Schools and lab 14 -->
+<html lang="en">
+
+<head>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+
+        window.onload = function () { // creating the function for window.onload
+            //if there are errors in the registration data it will notify the user
+            if (params.has('errors')) {
+
+                console.log("invalid");
+                alert('Fix the following errors: \n' + params.get('errors'));
+            }
+        }    
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Import Bootstrap CSS library -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Own CSS style -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Registration Page</title>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="./imgs/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tyler's Lululemon Store :)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">BACK TO PRODUCTS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">|</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">TYLER JOHNSON</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">ITM 352</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="log-in">
+                HELLO :) REGISTER NEW USER
+            </div>
+        </div>
+
+        <div class="row justify-content-center text-center">
+            <!-- Creates registration form, from w3 schools -->
+            <form class="Register" method="POST" action="process_register" name="Register">
+                <input type="text" name="fullname" size="50" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+"
+                    placeholder="Enter First & Last Name"><br />
+                <!-- placeholder for registration (first & last name) -->
+                <input type="text" name="username" size="50" pattern=".[a-z0-9]{3,10}" required
+                    title="Minimum 4 Characters, Maximum 10 Characters, Numbers/Letters Only"
+                    placeholder="Enter Username"><br /> <!-- Username placeholder -->
+                <input type="email" name="email" size="50" placeholder="Enter Email"
+                    pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Please enter valid email."><br />
+                <!-- Characters able to input -->
+                <input type="password" id="password" name="password" size="50" pattern=".{6,}" required
+                    title="6 Characters Minimum" placeholder="Enter Password"><br />
+                <input type="password" id="repeat_password" name="repeat_password" size="50" pattern=".{6,}" required
+                    title="6 Characters Minimum" placeholder="Repeat Password"><br />
+
+                <input class="log-in-button" type="submit" value="Register" id="submit">
+            </form>
+            <script>
+                if (request.session.username) {
+                    str += ` value=${request.session.username}`;
+                }
+                Register.action += document.location.search; //saves the query string from the products page for the invoice
+            </script>
+        </div>
+    </div>
+
+</body>
+
+</html>

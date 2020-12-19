@@ -1,0 +1,266 @@
+<!-- Code used from Assignment 3 Code examples -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Tyler Johnson" />
+    <meta name="description" content="Displays products" />
+
+    <!-- Add responsive design on smaller screens -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Own CSS style -->
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Lululemon Store</title>
+
+    <!-- Import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Import our own product data -->
+    <script src="product_data.js" type="text/javascript"></script>
+
+    <!-- Checks for how many items is in the cart -->
+    <script>
+      let numItem = 0;
+      let total = 0;
+
+      for (i = 0; i < products.length; i++) {
+        for (j = 0; j < products[i].length; j++) {
+          let key = Object.values(products[i][j]).join(",");
+
+          if (parseInt(localStorage.getItem(key), 10) > 0) {
+              numItem += (parseInt(localStorage.getItem(key), 10));
+          }
+        }
+      }
+
+      if (!(numItem >= 0)) {
+        numItem = 0;
+      }
+    </script>
+
+    <!-- Import Bootstrap CSS library to help format website design -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Import Semantic UI CSS library to help format website design  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <!-- Import Bootstrap JS library to help format website design  -->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Import Semantic UI JS library to help format website design  -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+      integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img
+          src="./imgs/logo.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+      </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tyler's Lululemon Store :)</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">|</a>
+          </li>
+          <li class="nav-item ml-auto">
+            <a class="nav-link" href="#">ITM 352</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">|</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">HOME</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="index_shirts.html">SHIRTS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index_pants.html">PANTS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index_acc.html">ACCESSORIES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index_bags.html">BAGS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html">YOUR CART</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content Of Page -->
+
+    <div class="container">
+      <div class="row justify-content-center text-center">
+        <div class="log-in">
+          <h2>
+            You have <span id="cart_total">0</span> items in your shopping cart
+          </h2>
+
+          <script>
+            cart_total.innerHTML = numItem;
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui grid" style="margin-right: 8vw">
+      <div class="ten wide column">
+        <div class="ui divided grid" style="margin-left: 8vw">
+          <h1>My Bag</h1>
+          <script>
+            if (numItem === 0) {
+              document.write(`
+                    <div class="strecthed row">
+                        <div class="ui header">Your Cart is Empty</div>
+                    </div>
+                `);
+            }
+            for (i = 0; i < products.length; i++) {
+              for (j = 0; j < products[i].length; j++) {
+                let key = Object.values(products[i][j]).join(",");
+
+                if (parseInt(localStorage.getItem(key), 10) > 0) {
+                  total +=
+                    products[i][j].price *
+                    parseInt(localStorage.getItem(key), 10);
+                  document.write(`
+                                <div class="strecthed row">
+                                    <div class="four wide column">
+                                        <img
+                                        class="ui image"
+                                        src="./imgs/${products[i][j].image}"
+                                        alt="Card image cap"
+                                        />
+                                    </div>
+                                    <div class="six wide column">${
+                                      products[i][j].model
+                                    }</div>
+                                    <div class="two wide column">
+                                    Quantity:
+                                    <br>
+                                    ${parseInt(localStorage.getItem(key), 10)}
+                                    </div>
+                                    <div class="two wide column">
+                                    Item Price:
+                                    <br>
+                                    $${products[i][j].price}
+                                    </div>
+                                    <div class="two wide column">
+                                    Total Price
+                                    <br>
+                                    $${
+                                      products[i][j].price *
+                                      parseInt(localStorage.getItem(key), 10)
+                                    }
+                                    </div>
+                                </div>  
+                                  `);
+                }
+              }
+            }
+          </script>
+        </div>
+      </div>
+
+      <div class="six wide column">
+        <h1>Order Summary</h1>
+        <hr style="background-color: black; height: 2px" />
+        <div class="ui divided list">
+          <div id="total" class="item" style="font-size: 2vh"></div>
+          <div id="shipping" class="item" style="font-size: 2vh"></div>
+          <div id="tax" class="item" style="font-size: 2vh"></div>
+          <div id="exttotal" class="item" style="font-size: 2vh"></div>
+          <script>
+            let totalElem = document.getElementById("total");
+            let text = `Subtotal: USD $${total}`;
+
+            totalElem.innerHTML = text;
+
+            let taxElem = document.getElementById("tax");
+
+            text = `Tax: $${(total * 0.0575).toFixed(2)}`;
+            taxElem.innerHTML = text;
+
+            let shipElem = document.getElementById("shipping");
+            let shipping;
+            if (total > 0 && total <= 49) {
+              shipping = 2;
+            } else if (total >= 50 && total <= 99) {
+              shipping = 5;
+            } else {
+              shipping = (total * 0.05).toFixed(2);
+            }
+            text = `Shipping: ${shipping}`;
+            shipElem.innerHTML = text;
+
+            let extTotalElem = document.getElementById("exttotal");
+            let extTotal = total * 1.0575 + parseFloat(shipping);
+            extTotal = extTotal.toFixed(2);
+            text = `Total: $${extTotal}`;
+            extTotalElem.innerHTML = text;
+          </script>
+        </div>
+        <button class="ui red large button" onclick="checkout()">
+          <svg
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+            class="iconButtonIcon-2zAiF"
+            focusable="false"
+          >
+            <path
+              d="m12 0c-6.627417 0-12 5.372583-12 12s5.372583 12 12 12 12-5.372583 12-12-5.372583-12-12-12zm4.69 19.7333333c-1.0484896-.0017666-2.0533339-.4199725-2.7934778-1.1626169s-1.1549585-1.7488934-1.1531889-2.7973831c.0485423-.755246.2349487-1.4952231.55-2.1833333.1888889-.5111111.3777778-1.0188889.5666667-1.5233333.4756908-1.193802.8307914-2.43218723 1.06-3.6966667.1566667-1 .14-2.22666667-.6233333-3-.5833334-.58666667-1.4866667-.70333333-2.2966667-.72333333s-1.7133333.13666666-2.29666667.72666666c-.76333333.77-.78 2-.62333333 3 .22942436 1.2633467.58452194 2.50060497 1.06 3.69333337.1866667.5066666.3755556 1.0144444.5666667 1.5233333.3150513.6881102.5014577 1.4280873.55 2.1833333.0108181 1.8972796-1.33101712 3.5332966-3.19373864 3.8939286s-3.7181943-.6563704-4.41626139-2.4205952c.52880634.4863512 1.23685296.7294912 1.95288859.6706129.71603564-.0588783 1.37485437-.414413 1.81711141-.9806129.5325003-.7201071.69318124-1.6495845.43333333-2.5066667-.25666667-.93-.82-1.6666667-1.27-2.5466667-1.46333333-2.49999997-1.40333333-4.36999997-1.40333333-4.36999997 0-3.73 3.56-4.36333333 6.82333333-4.36333333 3.2633333 0 6.8233333.63333333 6.8233333 4.36333333 0 0 .06 1.87-1.4033333 4.36999997-.45.8633334-1 1.6166667-1.27 2.5466667-.2598479.8570822-.099167 1.7865596.4333333 2.5066667.4422571.5661999 1.1010758.9217346 1.8171114.9806129.7160357.0588783 1.4240823-.1842617 1.9528886-.6706129-.5973841 1.5002888-2.0484858 2.4852951-3.6633333 2.4866666z"
+              fill="currentColor"
+            ></path>
+          </svg>
+          &nbsp; CHECKOUT
+        </button>
+
+        <script>
+          function checkout() {
+            window.location.href = "./login.html?cart";
+          }
+        </script>
+      </div>
+    </div>
+  </body>
+  <script>
+    $(".ui.dropdown").dropdown();
+  </script>
+</html>

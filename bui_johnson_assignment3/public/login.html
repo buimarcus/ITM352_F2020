@@ -1,0 +1,137 @@
+<!-- Login page referenced from w3 schools -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script>
+        let params = (new URL(document.location)).searchParams;
+
+        window.onload = function () { //Alert for invalid usernames/passwords
+            if (params.has('LogError')) {
+                alert('Invalid Username or Passowrd');
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <!-- Import Bootstrap CSS library -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    
+    <!-- Own CSS style -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Import Semantic UI CSS library to help format website design  -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+    crossorigin="anonymous"
+    />
+    <title>Login Page</title>
+</head>
+
+<body>
+    <!-- Import Semantic UI JS library to help format website design  -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+      integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Import Bootstrap JS library to help format website design  -->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="./imgs/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tyler's Lululemon Store :)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">BACK TO PRODUCTS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">|</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">TYLER JOHNSON</a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">ITM 352</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="log-in">
+                <h1 class="log-in-header">LOG INTO LULULEMON</h1></div>
+        </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-6">
+                <div class="please-log-in">PLEASE LOG IN TO CONTINUE</div>
+                <form class="ui form" name="login" onsubmit="return process_login(this);">
+                    <script type="text/javascript">
+                        function process_login(e) {
+                            if(localStorage.getItem("users") === null || localStorage.getItem("users") === "NaN" || JSON.parse(localStorage.getItem("users"))[e.username.value] === undefined) {
+                                let messageElem = document.getElementById('message');
+                                let text = "<div class=\"ui negative message\">Username does not exists</div>"
+                                messageElem.innerHTML = text;
+                            }
+                            else if(JSON.parse(localStorage.getItem("users"))[e.username.value].password === e.password.value){
+                                if((new URL(document.location)).searchParams.has('cart')) {
+                                    window.location.href = `./invoice.html?cart=&username=${e.username.value}`;
+                                }
+                                else {
+                                    window.location.href = `./index.html?username=${e.username.value}`;
+                                }
+                            }
+                            else {
+                                let messageElem = document.getElementById('message');
+                                let text = "<div class=\"ui negative message\">Username or password is incorrect</div>"
+                                messageElem.innerHTML = text;
+                            } 
+                            return false;
+                        }
+                    </script>
+                    <div class="container"><br>
+                        <div class="field">
+                            <label>Username: </label>
+                            <input type="text" name="username" id="username" size="40" placeholder="USERNAME" required>
+                        </div>
+                        
+                        <br>
+                        <div class="field">
+                            <label>Password:</label>
+                            <input type="password" name="password" size="40" placeholder="PASSWORD" onkeyup="" required>
+                        </div>
+                        <br>
+                        <input class="log-in-button" type="submit" name="login">
+                        <div id="message"></div>
+                    </div>
+                </form>
+
+                <div class="new-user">NEW USER? REGISTER BELOW</div>
+                <input type="button" name="newuser" value="New User"
+                    onclick="window.location='./register.html' + document.location.search;" class='register'>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

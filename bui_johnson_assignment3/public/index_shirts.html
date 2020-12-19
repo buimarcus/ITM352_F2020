@@ -1,0 +1,194 @@
+<!-- Import products_medium from file -->
+<script src="product_data_shirts.js" type="text/javascript"></script>
+<script>
+  let buttonNumber = 0;
+  var this_product_key = "";
+  //Referenced from assignment 1 examples
+  function isNonNegInt(q, return_errors = false) {
+    errors = []; // will assume there are no errors
+    if (q == "") q = 0; // handle blank inputs as if they are 0
+    if (Number(q) != q)
+      errors.push('<font color="red">Not a number! :(</font>');
+    // Check if string is a number value
+    else if (q < 0) errors.push('<font color="red">Negative value! :(</font>');
+    // Check if it is non-negative
+    else if (parseInt(q) != q)
+      errors.push('<font color="red">Not an integer! :(</font>'); // Check that it is an integer
+    return return_errors ? errors : errors.length == 0; // If no errors, do not show "invalid quantity" text
+  }
+  //Modified from Lab12 --> shows errors next to quantity textbox if there are invalid quantities entered
+  function checkQuantityTextbox(theTextbox) {
+    errs = isNonNegInt(theTextbox.value, true);
+    if (errs.length == 0) errs = ["You want:"]; //If there's no errors, replace "Quantity" with "You want:" text
+    if (theTextbox.value.trim() == "") errs = ["Quantity"];
+    document.getElementById(theTextbox.name + "_label").innerHTML = errs.join(
+      ", "
+    ); // Show errors if there's invalid quantities
+  }
+  window.onload = function () {
+    let params = new URL(document.location).searchParams; // get the query string which has the form data
+    // form was submitted so check that quantities are valid then redirect to invoice if ok
+    if (params.has("purchase_submit_button")) {
+      has_errors = false; // assume quantities are valid//
+      total_qty = 0; // need to check if something was selected so we will look if the total > 0
+      //For every product in the array, write the product number, display its image and name, and list price
+      for (i = 0; i < shirts.length; i++) {
+        if (params.has(`quantity${i}`)) {
+          a_qty = params.get(`quantity${i}`);
+          // make textboxes sticky in case of invalid data
+          product_form[`quantity${i}`].value = a_qty;
+          total_qty += a_qty;
+          if (!isNonNegInt(a_qty)) {
+            has_errors = true; // invalid quantity
+            checkQuantityTextbox(product_form[`quantity${i}`]); // show where the error is
+          }
+        }
+      }
+      // Now respond to errors or redirect to invoice//
+      if (has_errors) {
+        alert("Please enter only valid quantities!");
+      } else if (total_qty == 0) {
+        //general alert//
+        alert("Please select some quantities!");
+      } else {
+        // all good//
+        window.location = `./invoice.html${document.location.search}`; //Redirects itself
+        window.stop;
+      }
+    }
+  };
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Tyler Johnson" />
+    <meta name="description" content="Displays products" />
+    <!-- Add responsive design on smaller screens -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Import Bootstrap CSS library -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <!-- Own CSS style -->
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Lululemon Store</title>
+  </head>
+
+  <body>
+    <form name="form" onsubmit="return submit_purchase(this);">
+      <script type="text/javascript">
+        function submit_purchase(e) {
+          let object = "quantity" + buttonNumber;
+          let key = Object.values(shirts[buttonNumber]).join(",");
+
+          if (
+            (localStorage.getItem(key) === null ||
+            localStorage.getItem(key) === "NaN") &&
+            e[object].value >= 0
+          ) {
+            localStorage.setItem(key, parseInt(e[object].value, 10));
+          } else if(e[object].value >= 0) {
+            let newValue =
+              parseInt(e[object].value, 10) +
+              parseInt(localStorage.getItem(key), 10);
+            localStorage.setItem(key, newValue);
+          }
+
+          return false;
+        }
+      </script>
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+          <img
+            src="./imgs/logo.png"
+            width="30"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+          />
+        </a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                >Marcus and Tyler's Lululemon Store :)</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">|</a>
+            </li>
+            <li class="nav-item ml-auto">
+              <a class="nav-link" href="#">ITM 352</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">|</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">HOME</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="index_shirts.html">SHIRTS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index_pants.html">PANTS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index_acc.html">ACCESSORIES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index_bags.html">BAGS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cart.html">YOUR CART</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main Content Of Page -->
+
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="log-in">LULULEMON SHIRTS</div>
+        </div>
+        <div class="row">
+          <script>
+            function test(value) {
+              buttonNumber = value;
+            }
+            //For loop that generates the products on the display page
+            for (i = 0; i < shirts.length; i++) {
+              // console.log(products[i]);
+              document.write(`
+                            <div class="card col-3">
+                                <img class="card-img-top" src="./imgs/${shirts[i].image}" alt="Card image cap">
+                                    <div class="card-body">
+                                        
+                                        <span class="card-text float-left"> ${shirts[i].model}
+                                            <br> <p style="color:#8695A5">${shirts[i].color}</p></span>
+                                        <span class="price float-right">$${shirts[i].price}</span>
+                                    </div>         
+                                    <label id="quantity${i}_label"}">Quantity</label>
+                                    <input type="text" placeholder="0" name="quantity${i}" 
+                                onkeyup="checkQuantityTextbox(this);">
+                                <div class="nav-item ml-auto">
+                                    <button type="submit" name="submit_button" value="${i}" onClick="test(this.value)">Add To Cart</button>
+                            </div>
+                             </div>
+                        `);
+            }
+          </script>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
